@@ -114,9 +114,16 @@ static void write_ply_point_clouds( const std::string& fn, const PC_t& cloud, bo
     }
 }
 
+static void print_usage_message() {
+    std::cout << "Usage: \n" << "\tReadPLYPointCloud <input PLY filename> <output PLY filename>\n\n";
+}
+
 int main(int argc, char** argv) {
     std::cout << "Hello, ReadPLYPointCloud!\n";
-    assert( argc >= 3 );
+    if ( argc < 3 ) {
+        print_usage_message();
+        return -1;
+    }
 
     std::string inFn = argv[1];
     std::string outFn = argv[2];
