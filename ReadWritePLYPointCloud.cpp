@@ -53,10 +53,13 @@ static PC_t read_ply_point_cloud( const std::string& fn ) {
                              CGAL::PLY_property<unsigned char>("red"),
                              CGAL::PLY_property<unsigned char>("green"),
                              CGAL::PLY_property<unsigned char>("blue") ) ) ) {
+        ifs.close();
         std::stringstream ss;
         ss << "Read from PLY file " << fn << " failed. ";
         throw std::runtime_error( ss.str() );
     }
+
+    ifs.close();
 
     return cloud;
 }
@@ -108,10 +111,13 @@ static void write_ply_point_clouds( const std::string& fn, const PC_t& cloud, bo
                               CGAL::PLY_property<unsigned char>("red"),
                               CGAL::PLY_property<unsigned char>("green"),
                               CGAL::PLY_property<unsigned char>("blue") ) ) ) {
+        ofs.close();
         std::stringstream ss;
         ss << "Write to " << fn << " failed. ";
         throw std::runtime_error( ss.str() );
     }
+
+    ofs.close();
 }
 
 static void print_usage_message() {

@@ -44,6 +44,17 @@ std::vector<std::string> get_file_parts(const std::string &path) {
     return parts;
 }
 
+std::string add_prefix_suffix(
+        const std::string& fn,
+        const std::string& prefix="",
+        const std::string& suffix="" ) {
+    auto parts = get_file_parts(fn);
+    std::stringstream ss;
+    // Works under Linux.
+    ss << parts[0] << "/" << prefix << parts[1] << suffix << parts[2];
+    return ss.str();
+}
+
 void test_directory(const std::string &dir) {
     boost::filesystem::path p(dir);
 
