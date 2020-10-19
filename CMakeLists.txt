@@ -32,3 +32,9 @@ add_executable(EXE_READ_WRITE_PLY_MESH ReadWritePLYMesh.cpp)
 target_link_libraries(EXE_READ_WRITE_PLY_MESH
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5)
+
+set(EXE_SURFACE_NORMAL SurfaceNormal)
+add_executable(EXE_SURFACE_NORMAL SurfaceNormal.cpp)
+target_link_libraries(EXE_SURFACE_NORMAL
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5)
