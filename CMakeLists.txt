@@ -38,3 +38,9 @@ add_executable(EXE_SURFACE_NORMAL SurfaceNormal.cpp)
 target_link_libraries(EXE_SURFACE_NORMAL
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5)
+
+set(EXE_REPAIR Repair)
+add_executable(EXE_REPAIR Repair.cpp)
+target_link_libraries(EXE_REPAIR
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5)
