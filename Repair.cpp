@@ -15,13 +15,6 @@
 // Project headers.
 #include "common/Filesystem.hpp"
 
-// Macros.
-#define FUNC_NAME_STR \
-    __FUNCTION__ << ": "
-
-#define NEW_LINE \
-    std::cout << "\n";
-
 // Namespace.
 namespace pmp = CGAL::Polygon_mesh_processing;
 
