@@ -50,3 +50,9 @@ add_executable(${EXE_AFS} AFSReconstruction.cpp)
 target_link_libraries(${EXE_AFS}
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5)
+
+set(EXE_ISOTROPIC_REMESHING IsoTropicRemeshing)
+add_executable(${EXE_ISOTROPIC_REMESHING} IsotropicRemeshing.cpp)
+target_link_libraries(${EXE_ISOTROPIC_REMESHING}
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5)

@@ -111,6 +111,13 @@ int main( int argc, char** argv ) {
     Mesh_t mesh;
     read_surface_mesh( inFn, mesh );
 
+    // Check the validity of the surface mesh as a polygon mesh.
+    if ( CGAL::is_valid_polygon_mesh( mesh ) ) {
+        std::cout << "The mesh is valid. \n";
+    } else {
+        std::cout << "The mesh is invalid. \n";
+    }
+
     // Repair.
     remove_self_intersection_and_duplicate( mesh );
 

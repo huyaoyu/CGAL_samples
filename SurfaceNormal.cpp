@@ -124,6 +124,12 @@ int main( int argc, char** argv ) {
     NEW_LINE
 
     // Check and remove isolated vertices.
+    if ( CGAL::is_valid_polygon_mesh( mesh ) ) {
+        std::cout << "The mesh is valid. \n";
+    } else {
+        std::cout << "The mesh is invalid. \n";
+    }
+
     auto nIsolatedVertices = pmp::remove_isolated_vertices( mesh );
     std::cout << "nIsolatedVertices = " << nIsolatedVertices << "\n";
 
