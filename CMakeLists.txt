@@ -56,3 +56,9 @@ add_executable(${EXE_ISOTROPIC_REMESHING} IsotropicRemeshing.cpp)
 target_link_libraries(${EXE_ISOTROPIC_REMESHING}
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5)
+
+set(EXE_HOLE_FILLING HoleFilling)
+add_executable(${EXE_HOLE_FILLING} HoleFilling.cpp)
+target_link_libraries(${EXE_HOLE_FILLING}
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5)
