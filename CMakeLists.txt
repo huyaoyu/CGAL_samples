@@ -19,6 +19,9 @@ if(CGAL_Qt5_FOUND)
     add_definitions(-DCGAL_USE_BASIC_VIEWER -DQT_NO_KEYWORDS)
 endif()
 
+# Eigen.
+find_package(Eigen3 REQUIRED NO_MODULE)
+
 include_directories( includes )
 
 set(EXE_READ_WRITE_PLY_POINT_CLOUD ReadWritePLYPointCloud)
@@ -62,3 +65,10 @@ add_executable(${EXE_HOLE_FILLING} HoleFilling.cpp)
 target_link_libraries(${EXE_HOLE_FILLING}
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5)
+
+set(EXE_RAY_SHOOTING RayShooting)
+add_executable(${EXE_RAY_SHOOTING} RayShooting.cpp)
+target_link_libraries(${EXE_RAY_SHOOTING}
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5
+        Eigen3::Eigen)

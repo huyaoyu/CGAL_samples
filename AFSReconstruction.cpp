@@ -17,6 +17,7 @@
 // Project headers.
 #include "common/Filesystem.hpp"
 #include "common/ScopeTimer.hpp"
+#include "IO/SurfaceMesh.hpp"
 
 // typedefs for CGAL.
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel_t;
@@ -139,31 +140,6 @@ static PC_t read_point_cloud( const std::string& fn ) {
     ifs.close();
 
     return cloud;
-}
-
-static void write_surface_mesh( const std::string& fn, const Mesh_t& mesh, bool flagBinary=true ) {
-    std::ofstream ofs;
-    if ( flagBinary ) {
-        ofs.open(fn, std::ios::binary);
-        CGAL::set_binary_mode(ofs);
-    } else {
-        ofs.open(fn);
-    }
-
-    if ( !ofs ) {
-        std::stringstream ss;
-        ss << "Open " << fn << " for writing failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::write_ply(ofs, mesh) ) {
-        ofs.close();
-        std::stringstream ss;
-        ss << "Write " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ofs.close();
 }
 
 int main( int argc, char** argv ) {

@@ -14,6 +14,7 @@
 
 // Project headers.
 #include "common/Filesystem.hpp"
+#include "IO/SurfaceMesh.hpp"
 
 // Macros.
 #define FUNC_NAME_STR \
@@ -37,24 +38,6 @@ typedef boost::graph_traits<Mesh_t>::face_descriptor   FaceDesc_t;
 // Global constants.
 const std::string PM_FACE_NORMAL   = "f:normals";
 const std::string PM_VERTEX_NORMAL = "v:normals";
-
-static void read_surface_mesh( const std::string& fn, Mesh_t& mesh) {
-    std::ifstream ifs(fn);
-    if ( !ifs ) {
-        std::stringstream ss;
-        ss << "Failed to open " << fn << " for reading. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::read_ply( ifs, mesh ) ) {
-        ifs.close();
-        std::stringstream ss;
-        ss << "Read " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ifs.close();
-}
 
 static void estimate_face_normal(Mesh_t &mesh) {
     auto resAddPM = mesh.add_property_map<FaceDesc_t, Vector_t>(PM_FACE_NORMAL, CGAL::NULL_VECTOR);

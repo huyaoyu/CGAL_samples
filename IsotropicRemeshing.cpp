@@ -15,6 +15,7 @@
 // Local includes.
 #include "common/Filesystem.hpp"
 #include "common/ScopeTimer.hpp"
+#include "IO/SurfaceMesh.hpp"
 
 // Namespace.
 namespace pmp = CGAL::Polygon_mesh_processing;
@@ -103,49 +104,6 @@ static void remove_self_intersection_and_duplicate( Mesh_t &mesh ) {
     int newVerticesNB = pmp::duplicate_non_manifold_vertices(
             mesh, CGAL::parameters::output_iterator( std::back_inserter( duplicatedVertices ) ) );
     std::cout << "newVerticesNB = " << newVerticesNB << "\n";
-}
-
-static void read_surface_mesh( const std::string& fn, Mesh_t& mesh) {
-    std::ifstream ifs(fn);
-    if ( !ifs ) {
-        std::stringstream ss;
-        ss << "Failed to open " << fn << " for reading. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::read_ply( ifs, mesh ) ) {
-        ifs.close();
-        std::stringstream ss;
-        ss << "Read " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ifs.close();
-}
-
-static void write_surface_mesh( const std::string& fn, const Mesh_t& mesh, bool flagBinary=true ) {
-    std::ofstream ofs;
-    if ( flagBinary ) {
-        ofs.open(fn, std::ios::binary);
-        CGAL::set_binary_mode(ofs);
-    } else {
-        ofs.open(fn);
-    }
-
-    if ( !ofs ) {
-        std::stringstream ss;
-        ss << "Open " << fn << " for writing failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::write_ply(ofs, mesh) ) {
-        ofs.close();
-        std::stringstream ss;
-        ss << "Write " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ofs.close();
 }
 
 int main( int argc, char** argv ) {

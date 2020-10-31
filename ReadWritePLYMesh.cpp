@@ -11,6 +11,7 @@
 
 // Project headers.
 #include "common/Filesystem.hpp"
+#include "IO/SurfaceMesh.hpp"
 
 // typedefs for CGAL.
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel_t;
@@ -18,49 +19,6 @@ typedef Kernel_t::Point_3           Point_t;
 typedef CGAL::Surface_mesh<Point_t> Mesh_t;
 
 typedef boost::graph_traits<Mesh_t>::vertex_descriptor VertexDesc_t;
-
-static void read_surface_mesh( const std::string& fn, Mesh_t& mesh) {
-    std::ifstream ifs(fn);
-    if ( !ifs ) {
-        std::stringstream ss;
-        ss << "Failed to open " << fn << " for reading. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::read_ply( ifs, mesh ) ) {
-        ifs.close();
-        std::stringstream ss;
-        ss << "Read " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ifs.close();
-}
-
-static void write_surface_mesh( const std::string& fn, const Mesh_t& mesh, bool flagBinary=true ) {
-    std::ofstream ofs;
-    if ( flagBinary ) {
-        ofs.open(fn, std::ios::binary);
-        CGAL::set_binary_mode(ofs);
-    } else {
-        ofs.open(fn);
-    }
-
-    if ( !ofs ) {
-        std::stringstream ss;
-        ss << "Open " << fn << " for writing failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::write_ply(ofs, mesh) ) {
-        ofs.close();
-        std::stringstream ss;
-        ss << "Write " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ofs.close();
-}
 
 int main( int argc, char** argv ) {
     std::cout << "Hello, ReadWritePLYMesh! \n";

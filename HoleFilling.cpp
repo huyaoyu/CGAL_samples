@@ -19,6 +19,7 @@
 // Project headers.
 #include "common/Filesystem.hpp"
 #include "common/ScopeTimer.hpp"
+#include "IO/SurfaceMesh.hpp"
 
 namespace pmp = CGAL::Polygon_mesh_processing;
 
@@ -38,49 +39,6 @@ typedef Mesh_t::Property_map< FaceDesc_t, int > FaceHoleTagProp_t;
 
 // Global constants.
 static const std::string HOLE_TAG_PROP_NAME = "HoleTag";
-
-static void read_surface_mesh( const std::string& fn, Mesh_t& mesh) {
-    std::ifstream ifs(fn);
-    if ( !ifs ) {
-        std::stringstream ss;
-        ss << "Failed to open " << fn << " for reading. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::read_ply( ifs, mesh ) ) {
-        ifs.close();
-        std::stringstream ss;
-        ss << "Read " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ifs.close();
-}
-
-static void write_surface_mesh( const std::string& fn, const Mesh_t& mesh, bool flagBinary=true ) {
-    std::ofstream ofs;
-    if ( flagBinary ) {
-        ofs.open(fn, std::ios::binary);
-        CGAL::set_binary_mode(ofs);
-    } else {
-        ofs.open(fn);
-    }
-
-    if ( !ofs ) {
-        std::stringstream ss;
-        ss << "Open " << fn << " for writing failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    if ( !CGAL::write_ply(ofs, mesh) ) {
-        ofs.close();
-        std::stringstream ss;
-        ss << "Write " << fn << " failed. ";
-        throw std::runtime_error( ss.str() );
-    }
-
-    ofs.close();
-}
 
 static void fill_holes( Mesh_t& mesh,
                         std::vector<PatchFacets_t>& holePatchFaces,
