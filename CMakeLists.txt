@@ -72,3 +72,9 @@ target_link_libraries(${EXE_RAY_SHOOTING}
         ${LINKED_BOOST_LIBRARIES}
         ${CGAL_LIBRARIES} CGAL_Qt5
         Eigen3::Eigen)
+
+set(EXE_PC_SHAPE_DETECTION PCShapeDetection)
+add_executable(${EXE_PC_SHAPE_DETECTION} PointCloudShapeDetection.cpp)
+target_link_libraries(${EXE_PC_SHAPE_DETECTION}
+        ${LINKED_BOOST_LIBRARIES}
+        ${CGAL_LIBRARIES} CGAL_Qt5)
