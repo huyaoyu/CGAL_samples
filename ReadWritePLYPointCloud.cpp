@@ -38,7 +38,7 @@ static PC_t read_ply_point_cloud( const std::string& fn ) {
     std::ifstream ifs(fn);
     if (!ifs) {
         std::stringstream ss;
-        ss << "Cannot open " << fn << " for writing. ";
+        ss << "Cannot open " << fn << " for reading. ";
         throw std::runtime_error( ss.str() );
     }
 
